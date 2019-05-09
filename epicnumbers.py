@@ -9,7 +9,10 @@ def convert_to(num, fmt):
     signed_fmt, unsigned_fmt = fmt.lower(), fmt.upper()
 
     try:
-        packed = pack(signed_fmt, num)
+        if num < 0:
+            packed = pack(signed_fmt, num)
+        else:
+            packed = pack(unsigned_fmt, num)
     except:
         return None
 
