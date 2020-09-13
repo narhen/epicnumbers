@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from sys import argv, exit
-from string import digits, letters
+from string import digits, ascii_letters
 from struct import unpack, pack
 from tabulate import tabulate
 
@@ -16,8 +16,8 @@ def convert_to(num, fmt):
     except:
         return None
 
-    printable = digits + letters
-    strng = "".join([x if x in printable else "\\x{:02x}".format(ord(x)) for x in packed])
+    printable = [c for c in digits + ascii_letters]
+    strng = "".join( [x if x in printable else "\\x{:02x}".format(x) for x in packed])
     return unpack(signed_fmt, packed)[0], unpack(unsigned_fmt, packed)[0], strng
 
 def as_8(num, endian):
@@ -67,7 +67,7 @@ def main():
     funcs = [as_8, as_16, as_32, as_64]
 
     if len(argv) != 2:
-        print "Usage: {} <number>".format(argv[0])
+        print(f"Usage: {argv[0]} <number>")
         return 1
 
     num = string_to_int(argv[1])
@@ -82,7 +82,7 @@ def main():
         converted += [create_output(s, u, p, func.__doc__)]
 
     headers = ["type", "signed", "unsigned", "hex", "printable", "binary"]
-    print tabulate(converted, headers=headers)
+    print(tabulate(converted, headers=headers))
 
 if __name__ == "__main__":
     exit(main())
