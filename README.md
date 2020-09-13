@@ -4,9 +4,9 @@ A small tool I often used to convert a number into various other formats
 
 # Usage
 
-`pip install -r requirements.txt`
+`pip install --user -r requirements.txt`
 
-`python epicnumbers.py <number>`
+`python3 epicnumbers.py <number>`
 
 # Examples
 
