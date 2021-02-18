@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
+import argparse
 from sys import argv, exit
 from string import digits, ascii_letters
 from struct import unpack, pack
+
 from tabulate import tabulate
+from epicnumbers import __version__
 
 BIG_ENDIAN = ">"
 LITTLE_ENDIAN = "<"
@@ -67,14 +70,21 @@ def string_to_int(num):
     # if decimal
     return int(num, 10)
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Convert a number into various other formats")
+    parser.add_argument("number", type=str,
+            help="A number to convert. In decimal, hex, or binary. F.ex -10, 0x10, or 0b1010")
+    parser.add_argument("-V", "--version", action="version", version=f"%(prog)s {__version__}")
+
+    return parser.parse_args()
+
 def main():
     funcs = [as_8, as_16, as_32, as_64]
 
-    if len(argv) != 2:
-        print(f"Usage: {argv[0]} <number>")
-        return 1
+    args = parse_args()
 
-    num = string_to_int(argv[1])
+
+    num = string_to_int(args.number)
 
     converted = []
     for func in funcs:
