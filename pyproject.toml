@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "epicnumbers"
+version = "1.0.0"
+description = "A tool to convert numbers into various other formats and different sized integers"
+authors = ["Henrik Nårstad <henriknaa@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/narhen/epicnumbers"
+keywords = ["number", "integer", "conversion", "cli"]
+
+[tool.poetry.dependencies]
+python = ">=3.7,<4.0"
+tabulate = "^0.8.8"
+importlib-metadata = {version = "^3.4.0", python = "<3.8"}
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+ipython = "^7.20.0"
+
+[tool.poetry.scripts]
+epicnumbers = "epicnumbers.main:main"
+en = "epicnumbers.main:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

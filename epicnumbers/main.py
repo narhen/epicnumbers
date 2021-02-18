@@ -5,6 +5,9 @@ from string import digits, ascii_letters
 from struct import unpack, pack
 from tabulate import tabulate
 
+BIG_ENDIAN = ">"
+LITTLE_ENDIAN = "<"
+
 def convert_to(num, fmt):
     signed_fmt, unsigned_fmt = fmt.lower(), fmt.upper()
 
@@ -16,9 +19,12 @@ def convert_to(num, fmt):
     except:
         return None
 
-    printable = [c for c in digits + ascii_letters]
-    strng = "".join( [x if x in printable else "\\x{:02x}".format(x) for x in packed])
-    return unpack(signed_fmt, packed)[0], unpack(unsigned_fmt, packed)[0], strng
+    printable_chars = [c for c in digits + ascii_letters]
+
+    signed = unpack(signed_fmt, packed)[0]
+    unsigned = unpack(unsigned_fmt, packed)[0]
+    printable = "".join([x if x in printable_chars else "\\x{:02x}".format(x) for x in packed])
+    return signed, unsigned, printable
 
 def as_8(num, endian):
     """8 bit"""
@@ -62,8 +68,6 @@ def string_to_int(num):
     return int(num, 10)
 
 def main():
-    BIG_ENDIAN = ">"
-    LITTLE_ENDIAN = "<"
     funcs = [as_8, as_16, as_32, as_64]
 
     if len(argv) != 2:
