@@ -4,15 +4,19 @@ A small tool I often used to convert a number into various other formats
 
 # Usage
 
-`pip install --user -r requirements.txt`
+```bash
+$ pip install epicnumbers
+```
 
-`python3 epicnumbers.py <number>`
+```bash
+$ epicnumbers <number>
+```
 
 # Examples
 
 Convert -100 into signed, unsigned, hex, printable and binary in different sized integers
 ```
-$ python ./epicnumbers.py -100
+$ en -100
 type      signed              unsigned  hex                  printable                         binary
 ------  --------  --------------------  -------------------  --------------------------------  -----------------------------------------------------------------------
 8 bit       -100                   156  0x9c                 \x9c                              10011100
@@ -23,7 +27,7 @@ type      signed              unsigned  hex                  printable          
 
 Convert 0x100 into signed, unsigned, hex, printable and binary in different sized integers
 ```
-$ python ./epicnumbers.py 100h
+$ en 100h
 type      signed    unsigned  hex    printable                         binary
 ------  --------  ----------  -----  --------------------------------  ----------
 16 bit       256         256  0x100  \x00\x01                          1 00000000
@@ -33,7 +37,7 @@ type      signed    unsigned  hex    printable                         binary
 
 Convert 100b (binary) into signed, unsigned, hex, printable and binary in different sized integers
 ```
-$ python ./epicnumbers.py 100b
+$ en 100b
 type      signed    unsigned  hex    printable                           binary
 ------  --------  ----------  -----  --------------------------------  --------
 8 bit          4           4  0x4    \x04                                   100
@@ -42,3 +46,20 @@ type      signed    unsigned  hex    printable                           binary
 64 bit         4           4  0x4    \x04\x00\x00\x00\x00\x00\x00\x00       100
 ```
 
+# Development
+
+1. install [poetry](https://python-poetry.org/)
+2. `$ poetry install`
+3. `$ poetry shell`
+
+## Run tests
+
+```bash
+$ poetry run pytest
+```
+
+## Run tool
+
+```bash
+$ poetry run en 100h
+```
