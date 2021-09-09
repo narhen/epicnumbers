@@ -22,11 +22,11 @@ def convert_to(num, fmt):
     except:
         return None
 
-    printable_chars = [c for c in digits + ascii_letters]
+    printable_chars = [ord(c.encode()) for c in digits + ascii_letters]
 
     signed = unpack(signed_fmt, packed)[0]
     unsigned = unpack(unsigned_fmt, packed)[0]
-    printable = "".join([x if x in printable_chars else "\\x{:02x}".format(x) for x in packed])
+    printable = "".join([chr(x) if x in printable_chars else "\\x{:02x}".format(x) for x in packed])
     return signed, unsigned, printable
 
 def as_8(num, endian):
